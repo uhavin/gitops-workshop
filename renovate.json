@@ -1,0 +1,38 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "docker:enableMajor",
+    "replacements:k8s-registry-move",
+    ":disableRateLimiting",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":timezone(Europe/Amsterdam)"
+  ],
+  "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
+  "ignorePaths": ["**/*.sops.*"],
+  "flux": {
+    "fileMatch": [
+      "(^|/)apps/.+\\.ya?ml(?:\\.j2)?$",
+      "(^|/)base/.+\\.ya?ml(?:\\.j2)?$",      
+      "(^|/)infra/.+\\.ya?ml(?:\\.j2)?$",
+      "(^|/)clusters/.+\\.ya?ml(?:\\.j2)?$"
+    ]
+  },
+  "helm-values": {
+    "fileMatch": [
+      "(^|/)apps/.+\\.ya?ml(?:\\.j2)?$",
+      "(^|/)base/.+\\.ya?ml(?:\\.j2)?$",      
+      "(^|/)infra/.+\\.ya?ml(?:\\.j2)?$",
+      "(^|/)clusters/.+\\.ya?ml(?:\\.j2)?$"
+    ]
+  },
+  "kubernetes": {
+    "fileMatch": [
+      "(^|/)apps/.+\\.ya?ml(?:\\.j2)?$",
+      "(^|/)base/.+\\.ya?ml(?:\\.j2)?$",      
+      "(^|/)infra/.+\\.ya?ml(?:\\.j2)?$",
+      "(^|/)clusters/.+\\.ya?ml(?:\\.j2)?$"
+    ]
+  }
+}
