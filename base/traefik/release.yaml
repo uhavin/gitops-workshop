@@ -63,8 +63,15 @@ spec:
           certificateRefs:
           - name: jellyfin-tls
             namespace: traefik
-    web:
-      redirectTo: websecure
+        https-whoami:
+          port: 8443
+          hostname: "whoami.cluster.domain"
+          protocol: HTTPS
+          namespacePolicy: All
+          mode: Terminate
+          certificateRefs:
+          - name: whoami-tls
+            namespace: traefik            
     persistence:
       enabled: false
     podSecurityContext: null

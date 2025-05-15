@@ -5,3 +5,4 @@ resources:
 - prometheus.yaml
 - certmanager.yaml
 - media.yaml
+- whoami.yaml
