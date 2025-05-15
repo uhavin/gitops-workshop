@@ -2,11 +2,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: helm
+  name: sources
   namespace: flux-system
 spec:
-  interval: 1m0s
-  path: ./infra/helm
+  interval: 5m0s
+  path: ./clusters/my-cluster/sources
   prune: true
   sourceRef:
     kind: GitRepository
@@ -15,12 +15,27 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: namespaces
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  dependsOn:
+    - name: sources    
+  path: ./clusters/my-cluster/namespaces
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system    
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: infra
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 5m0s
   dependsOn:
-    - name: helm    
+    - name: namespaces    
   path: ./infra
   prune: true
   sourceRef:
@@ -33,7 +48,7 @@ metadata:
   name: base
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 5m0s
   dependsOn:
     - name: infra  
   path: ./base
@@ -48,9 +63,9 @@ metadata:
   name: apps
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 5m0s
   dependsOn:
-    - name: base-mgmt
+    - name: base
   path: ./apps
   prune: true
   sourceRef:

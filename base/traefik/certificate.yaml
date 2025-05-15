@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jellyfin-tls
+  namespace: traefik
+spec:
+  dnsNames:
+    - 'jellyfin.cluster.domain'
+  secretName: jellyfin-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

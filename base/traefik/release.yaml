@@ -42,6 +42,10 @@ spec:
       dashboard:
         enabled: false
     gateway:
+      annotations:
+        dns.gardener.cloud/dnsnames: "*"
+        dns.gardener.cloud/class: garden
+        cert.gardener.cloud/purpose: managed
       enabled: true
       namespacePolicy: All
       listeners:
@@ -50,23 +54,20 @@ spec:
           hostname: ""
           protocol: HTTP
           namespacePolicy: All
-        https-wen:
+        https-jellyfin:
           port: 8443
-          hostname: ""
+          hostname: "jellyfin.cluster.domain"
           protocol: HTTPS
           namespacePolicy: All
           mode: Terminate
+          certificateRefs:
+          - name: jellyfin-tls
+            namespace: traefik
     web:
-      redirectTo: websecure      
+      redirectTo: websecure
     persistence:
       enabled: false
     podSecurityContext: null
-    metrics:
-      prometheus:
-        serviceMonitor:
-          enabled: true
-        prometheusRule:
-          enabled: true
     tls:
       options:
         default:
@@ -80,3 +81,8 @@ spec:
             - CurveP384
           minVersion: VersionTLS12
           sniStrict: true
+    logs:
+      general:
+        level: "INFO"
+      access:
+        enabled: true
