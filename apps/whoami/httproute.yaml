@@ -10,7 +10,7 @@ spec:
       namespace: traefik
       kind: Gateway
   hostnames:
-    - whoami.lzv2734l60.ftc3iai.shoot.emk.fuga.cloud
+    - 'whoami.lzv2734l60.ftc3iai.shoot.emk.fuga.cloud'
   rules:
     - backendRefs:
         - name: whoami-app
