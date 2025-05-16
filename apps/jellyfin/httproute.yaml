@@ -10,7 +10,7 @@ spec:
       namespace: traefik
       kind: Gateway
   hostnames:
-    - 'jellyfin.lzv2734l60.ftc3iai.shoot.emk.fuga.cloud'
+    - jellyfin.lzv2734l60.ftc3iai.shoot.emk.fuga.cloud
   rules:
     - backendRefs:
         - name: jellyfin
